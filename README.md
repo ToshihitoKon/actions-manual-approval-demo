@@ -8,7 +8,7 @@ Last deploy: 6a2ed01cebcbc1ebbb899f6dc0ebe40e60f2e5fa
 gh workflow run deploy -r main
 ```
 
-![wait-approval](docs/wait-approval.png)
+![waiting-approval](docs/waiting-approval.png)
 
 ```
 gh workflow run approve -r main
