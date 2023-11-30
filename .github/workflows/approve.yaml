@@ -11,7 +11,11 @@ jobs:
         with:
           version: 0.7.1
 
-      - name: Notify slack workflow start
+      - name: Check unauthorized users
+        if: ${{ github.actor != "ToshihitoKon" }}
+        run: exit 1
+
+      - name: Approve
         env:
           SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
         run: |
