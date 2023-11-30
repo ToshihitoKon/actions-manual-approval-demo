@@ -1,6 +1,6 @@
 GitHub Actionsの実行履歴を利用したManual Approvalの例です。
 
-Last deploy: 6a2ed01cebcbc1ebbb899f6dc0ebe40e60f2e5fa
+Last deploy: adb31be27131f48ad5e9bf4e8ae2f1dfbccc171f
 
 ## デプロイ
 
