@@ -12,7 +12,7 @@ jobs:
           version: 0.7.1
 
       - name: Check unauthorized users
-        if: ${{ github.actor != "ToshihitoKon" }}
+        if: ${{ github.actor }} != "ToshihitoKon"
         run: exit 1
 
       - name: Approve
