@@ -7,6 +7,8 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permission:
+      content: write # デプロイの証拠にmain直pushするためだけ
     steps:
       - uses: actions/checkout@v4
 
@@ -30,7 +32,7 @@ jobs:
           until ${isApproved}; do
             sleep 10
             result=$(gh run list \
-              --workflow approve.yml \
+              --workflow approve \
               --status success \
               --branch ${{ github.ref_name }} \
               --json headSha \
@@ -48,4 +50,17 @@ jobs:
             --token ${{ secrets.SLACK_TOKEN}} \
             --channel ${{ secrets.SLACK_CHANNEL }} \
             --username "GitHub Actions: ${{ github.workflow }}" \
-            --text ":thumbsup: Deploy Approved!"
+            --text ":thumbsup: Deploy Approved!\nhash: ${{ github.sha }}"
+
+      - run: |
+          sed -i "s/Last deploy.*/Last deploy${{ github.sha }}/" README.md
+          git add README.md
+          git commit -m 'Actionsからmainに直push'
+          git push -u origin main
+
+      - run: |
+          slack-quickpost \
+            --token ${{ secrets.SLACK_TOKEN}} \
+            --channel ${{ secrets.SLACK_CHANNEL }} \
+            --username "GitHub Actions: ${{ github.workflow }}" \
+            --text ":tada: Deploy complete!"
