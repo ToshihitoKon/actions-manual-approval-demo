@@ -53,6 +53,8 @@ jobs:
             --text ":thumbsup: Deploy Approved!\nhash: ${{ github.sha }}"
 
       - run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
           sed -i "s/Last deploy.*/Last deploy${{ github.sha }}/" README.md
           git add README.md
           git commit -m 'Actionsからmainに直push'
