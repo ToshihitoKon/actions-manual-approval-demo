@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
-      content: write # デプロイの証拠にmain直pushするためだけ
+      contents: write # デプロイの証拠にmain直pushするためだけ
     steps:
       - uses: actions/checkout@v4
 
