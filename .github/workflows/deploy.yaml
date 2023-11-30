@@ -1,0 +1,43 @@
+name: deploy
+on:
+  workflow_dispatch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: ToshihitoKon/slack-quickpost@v1
+        with:
+          version: 0.7.1
+
+      - run: |
+          slack-quickpost \
+            --channel ${SLACK_CHANNEL} \
+            --username "GitHub Actions: ${{ github.workflow }}" \
+            --text ":black_square_for_stop: Waiting manual approve..."
+
+      - name: Wait manual approve
+        timeout-minutes: 5
+          isApproved=false
+          until ${isApproved}; do
+            sleep 10
+            result=$(gh run list \
+              --workflow approve.yml \
+              --status success \
+              --branch ${{ github.ref_name }} \
+              --json headSha \
+              --jq '.[].headSha' \
+              --limit 1)
+
+            # github.shaが一致すればOK
+            if [ "${{ github.sha }}" = "${result}" ]; then
+              isApproved=true
+            fi
+          done
+
+      - run: |
+          slack-quickpost \
+            --channel ${SLACK_CHANNEL} \
+            --username "GitHub Actions: ${{ github.workflow }}" \
+            --text ":thumbsup: Deploy Approved!"

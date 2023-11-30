@@ -1,0 +1,22 @@
+name: approve
+on:
+  workflow_dispatch
+
+jobs:
+  approve:
+    name: approve
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ToshihitoKon/slack-quickpost@v1
+        with:
+          version: 0.7.1
+
+      - name: Notify slack workflow start
+        env:
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+        run: |
+          slack-quickpost \
+            --token ${{ secrets.SLACK_TOKEN } \
+            --channel ${{ env.SLACK_CHANNEL }} \
+            --username "GitHub Actions: ${{ github.workflow }}" \
+            --text ":white_check_mark: Approved by ${{ github.actor }}"
