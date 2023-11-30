@@ -14,7 +14,8 @@ jobs:
 
       - run: |
           slack-quickpost \
-            --channel ${SLACK_CHANNEL} \
+            --token ${{ secrets.SLACK_TOKEN}} \
+            --channel ${{ secrets.SLACK_CHANNEL }} \
             --username "GitHub Actions: ${{ github.workflow }}" \
             --text ":black_square_for_stop: Waiting manual approve..."
 
@@ -40,6 +41,7 @@ jobs:
 
       - run: |
           slack-quickpost \
-            --channel ${SLACK_CHANNEL} \
+            --token ${{ secrets.SLACK_TOKEN}} \
+            --channel ${{ secrets.SLACK_CHANNEL }} \
             --username "GitHub Actions: ${{ github.workflow }}" \
             --text ":thumbsup: Deploy Approved!"
