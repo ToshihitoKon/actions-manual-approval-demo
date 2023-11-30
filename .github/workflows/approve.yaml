@@ -12,7 +12,7 @@ jobs:
           version: 0.7.1
 
       - name: Check unauthorized users
-        if: ${{ github.actor }} != "ToshihitoKon"
+        if: github.triggering_actor != "ToshihitoKon"
         run: exit 1
 
       - name: Approve
@@ -23,4 +23,4 @@ jobs:
             --token ${{ secrets.SLACK_TOKEN }} \
             --channel ${{ secrets.SLACK_CHANNEL }} \
             --username "GitHub Actions: ${{ github.workflow }}" \
-            --text ":white_check_mark: Approved by ${{ github.actor }}"
+            --text ":white_check_mark: Approved by ${{ github.triggering_actor }}"
