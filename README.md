@@ -11,7 +11,7 @@ gh workflow run deploy -r main
 ![wait-approval](docs/wait-approval.png)
 
 ```
- workflow run approve -r main
+gh workflow run approve -r main
  ```
 
 ![deploy-approved](docs/deploy-approved.png)
