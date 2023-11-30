@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      - uses: actions/checkout@v4
+
       - uses: ToshihitoKon/slack-quickpost@v1
         with:
           version: 0.7.1
