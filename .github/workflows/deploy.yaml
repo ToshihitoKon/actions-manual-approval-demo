@@ -7,7 +7,7 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    permission:
+    permissions:
       content: write # デプロイの証拠にmain直pushするためだけ
     steps:
       - uses: actions/checkout@v4
