@@ -21,6 +21,8 @@ jobs:
 
       - name: Wait manual approve
         timeout-minutes: 5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           isApproved=false
           until ${isApproved}; do
