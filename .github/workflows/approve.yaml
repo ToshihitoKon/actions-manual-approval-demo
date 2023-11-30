@@ -16,7 +16,7 @@ jobs:
           SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
         run: |
           slack-quickpost \
-            --token ${{ secrets.SLACK_TOKEN } \
+            --token ${{ secrets.SLACK_TOKEN }} \
             --channel ${{ env.SLACK_CHANNEL }} \
             --username "GitHub Actions: ${{ github.workflow }}" \
             --text ":white_check_mark: Approved by ${{ github.actor }}"
