@@ -1,3 +1,17 @@
-GitHub Actionsの実行履歴を利用したManual Approvalの例です
+GitHub Actionsの実行履歴を利用したManual Approvalの例です。
 
-Last deploy6a2ed01cebcbc1ebbb899f6dc0ebe40e60f2e5fa
+Last deploy: 6a2ed01cebcbc1ebbb899f6dc0ebe40e60f2e5fa
+
+## デプロイ
+
+```
+gh workflow run deploy -r main
+```
+
+![wait-approval](docs/wait-approval.png)
+
+```
+ workflow run approve -r main
+ ```
+
+![deploy-approved](docs/deploy-approved.png)
