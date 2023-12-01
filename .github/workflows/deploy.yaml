@@ -24,9 +24,10 @@ jobs:
             --text ":black_square_for_stop: Waiting manual approve..."
 
       - name: Wait manual approve
-        timeout-minutes: 5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash -xe {0}
+        timeout-minutes: 5
         run: |
           ghRunListCmd="gh run list --workflow approve --branch ${{ github.ref_name }} \
               --status success --json headSha --jq '.[].headSha' --limit 1"
