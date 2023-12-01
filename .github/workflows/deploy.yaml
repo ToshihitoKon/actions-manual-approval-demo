@@ -28,16 +28,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          ghRunListCmd="gh run list --workflow approve --branch ${{ github.ref_name }} \
+              --status success --json headSha --jq '.[].headSha' --limit 1"
+
           isApproved=false
           until ${isApproved}; do
             sleep 10
-            result=$(gh run list \
-              --workflow approve \
-              --status success \
-              --branch ${{ github.ref_name }} \
-              --json headSha \
-              --jq '.[].headSha' \
-              --limit 1)
+            result=$(${ghRunListCmd})
 
             # github.shaが一致すればOK
             if [ "${{ github.sha }}" = "${result}" ]; then
